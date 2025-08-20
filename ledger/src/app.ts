@@ -3,8 +3,8 @@ import express from "express";
 import helmet from "helmet";
 import { notFound } from "./middlewares/notFound";
 import { handleError } from "./middlewares/handleError";
-import { logger } from './middlewares/logger';
-import { initializeDatabase } from './db/utils'
+import { logger } from "./middlewares/logger";
+import { initializeDatabase } from "./db/utils";
 
 const app = express();
 
@@ -16,9 +16,9 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/heartbeat", (req, res) => {
-  res.json({
-    message: "Server alive and running.",
-  });
+	res.json({
+		message: "Server alive and running.",
+	});
 });
 
 app.use(notFound);
