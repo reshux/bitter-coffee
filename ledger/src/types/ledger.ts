@@ -67,13 +67,17 @@ export type TransactionStatus = "PENDING" | "POSTED" | "CANCELLED";
  * Multiple entries allow for complex multi-leg transactions
  */
 export type TransactionEntry = {
+	/** Unique identifier for the transaction entry */
+	id: string;
+	/** Reference to the transaction this entry belongs to */
+	transaction_id: string;
 	/** Whether this entry credits or debits the account */
 	direction: TransactionDirection;
 	/** Monetary amount for this entry, always positive */
 	amount: number;
-	/** ISO timestamp when the transaction was created */
+	/** ISO timestamp when the transaction entry was created */
 	created_at: string;
-	/** ISO timestamp when the transaction was last updated */
+	/** ISO timestamp when the transaction entry was last updated */
 	updated_at: string;
 };
 

@@ -59,3 +59,4 @@ export type DbTransactionUpdate = Updateable<TransactionsTable>;
 
 export type DbTransactionEntry = Selectable<TransactionEntriesTable>;
 export type NewDbTransactionEntry = Insertable<TransactionEntriesTable>;
+export type DbTransactionEntryUpdate = Updateable<TransactionEntriesTable>;
