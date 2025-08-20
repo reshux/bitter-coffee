@@ -1,29 +1,27 @@
 import cors from "cors";
 import express from "express";
 import helmet from "helmet";
-import morgan from "morgan";
-
-import type MessageResponse from "./interfaces/message-response.js";
-
-import api from "./api/index.js";
-import * as middlewares from "./middlewares.js";
+import { notFound } from "./middlewares/notFound";
+import { handleError } from "./middlewares/handleError";
+import { logger } from './middlewares/logger';
+import { initializeDatabase } from './db/utils'
 
 const app = express();
 
-app.use(morgan("dev"));
+(async () => await initializeDatabase())();
+
+app.use(logger);
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-app.get<object, MessageResponse>("/heartbeat", (req, res) => {
+app.get("/heartbeat", (req, res) => {
   res.json({
     message: "Server alive and running.",
   });
 });
 
-app.use("/api/v1", api);
-
-app.use(middlewares.notFound);
-app.use(middlewares.errorHandler);
+app.use(notFound);
+app.use(handleError);
 
 export default app;
