@@ -205,6 +205,7 @@ async function createTransactionEntriesTable(
 		"direction",
 		"amount",
 		"created_at",
+		"updated_at",
 	];
 
 	if (await tableExists(db, tableName)) {
@@ -230,6 +231,9 @@ async function createTransactionEntriesTable(
 		.addColumn("direction", "text", (col) => col.notNull())
 		.addColumn("amount", "real", (col) => col.notNull())
 		.addColumn("created_at", "text", (col) =>
+			col.notNull().defaultTo(sql`(datetime('now'))`),
+		)
+		.addColumn("updated_at", "text", (col) =>
 			col.notNull().defaultTo(sql`(datetime('now'))`),
 		)
 		.execute();
